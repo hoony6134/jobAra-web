@@ -6,10 +6,12 @@ import Step3 from './Step3';
 import Result from './Result';
 import Detail from './Detail';
 import { BrowserRouter as Router, Route, BrowserRouter, Routes} from 'react-router-dom';
+import RouteChangeTracker from './RouteChangeTracker';
 
 function App() {
   return (
     <BrowserRouter>
+    <RouteChangeTracker/>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/step1" element={<Step1 />} />
