@@ -72,7 +72,7 @@ const Step3 = () => {
                         <div className="container px-5 py-24 mx-auto">
                             <div className="flex flex-col">
                                 <div className="h-1 bg-purple-200 rounded overflow-hidden">
-                                    <div className="w-1/5 h-full bg-primary" />
+                                    <div className="w-full h-full bg-primary" />
                                 </div>
                                 <div className="flex flex-wrap sm:flex-row flex-col py-6 mb-12">
                                     <span className="sm:w-2/5 text-primary font-semibold title-font text-2xl mb-2 sm:mb-0">
