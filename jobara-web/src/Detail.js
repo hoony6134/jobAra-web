@@ -1,18 +1,30 @@
 import Wordmark from "./wordmark.png";
 import Logo from "./logo.png";
-import { useState } from "react"; // Import useState hook
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react"; // Import useState and useEffect hooks
+import { Link, useParams } from "react-router-dom";
 
-const Result = () => {
-    const resultList = JSON.parse(localStorage.getItem("result"));
-    const redirect = () => {
-        localStorage.clear();
-        window.location.href = "/step1";
-    }
+const Detail = () => {
+    const [loading, setLoading] = useState(false); // State to manage loading spinner visibility
+    const params = useParams();
 
-    const showDetail = (id) => {
-        window.location.href = `https://www.career.go.kr/cnet/front/base/job/jobView.do?SEQ=${id}`;
+    const checkResult = () => {
+        const id = params.id;
+        setLoading(true); // Show spinner when button is clicked
+        fetch(`https://cors-anywhere.herokuapp.com/https://www.career.go.kr/cnet/front/openapi/job.json?apiKey=93c44eac25d43ea0d7eb96e54d49974d&seq=${id}`, {
+            headers: {
+            'Content-Type': 'application/json'
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+            console.log(data);
+            localStorage.setItem('jobdata', JSON.stringify(data));
+            setLoading(false); // Hide spinner after fetching data
+            });
     }
+    useEffect(() => {
+        checkResult();
+    }, []);
 
     return (
         <div>
@@ -74,59 +86,12 @@ const Result = () => {
                                 </div>
                                 <div className="flex flex-wrap sm:flex-row flex-col py-6 mb-12">
                                     <span className="sm:w-2/5 text-primary font-semibold title-font text-2xl mb-2 sm:mb-0">
-                                        {localStorage.getItem("name")}님을 위한 <span className="text-secondary">추천 진로</span>
+                                        직업 정보 <span className="text-secondary">&nbsp;</span>
                                     </span>
                                     <p className="sm:w-3/5 leading-relaxed text-base sm:pl-10 pl-0">
-                                        {localStorage.getItem("name")}님에게 딱 맞는 진로를 가져와 봤어요. 각 직업 명칭을 눌러 자세한 정보를 확인해보세요.
+                                        {localStorage.getItem("name")}님을 위한 <span className="text-primary">추천 진로</span>
                                     </p>
                                 </div>
-                                <div className="flex flex-wrap sm:flex-row flex-col py-6 mb-12">
-                                    {resultList.map((item, index) => (
-                                        <>
-                                            <div className="w-full sm:w-1/2 lg:w-1/3 p-4" onClick={() => showDetail(item["additionalInfo"][0]["job_cd"])}>
-                                                <div className="flex relative">
-                                                    <img
-                                                        alt="gallery"
-                                                        className="absolute inset-0 w-full h-full object-cover object-center rounded-2xl"
-                                                        src={Logo}
-                                                    />
-                                                    <div className="px-8 py-10 relative z-10 w-full border-4 border-white bg-white opacity-95 hover:border-primary rounded-2xl">
-                                                        <h1 className="title-font text-xl font-bold text-primary mb-3">
-                                                            {item["job_nm"]}
-                                                        </h1>
-                                                        <h2 className="text-sm title-font font-medium text-gray-800 mb-1">
-                                                            {item["additionalInfo"][0]["aptit_name"]}
-                                                        </h2>
-                                                        <span className="title-font font-medium text-2xl text-primary">
-                                                            <img src={Logo} alt="" className="w-6 h-6 inline-block mr-2" />
-                                                            {item["score"]}점
-                                                        </span>
-                                                        <p className="leading-relaxed">
-                                                            {item["직업소개"]}
-                                                        </p>
-                                                        <span
-                                                            className="text-primary inline-flex items-center mt-4"
-                                                        >
-                                                            자세히 보기
-                                                            <svg
-                                                                fill="none"
-                                                                stroke="currentColor"
-                                                                strokeLinecap="round"
-                                                                strokeLinejoin="round"
-                                                                strokeWidth="2"
-                                                                className="w-4 h-4 ml-2"
-                                                                viewBox="0 0 24 24"
-                                                            >
-                                                                <path d="M5 12h14M12 5l7 7-7 7"></path>
-                                                            </svg>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </>
-                                    ))}
-                                </div>
-                                <button className="flex mx-auto text-white bg-primary border-0 py-2 px-8 focus:outline-none hover:bg-secondary rounded text-lg" onClick={redirect}>다시 시작하기</button>
                             </div>
                         </div>
                     </div>
@@ -147,4 +112,4 @@ const Result = () => {
         </div>
     );
 }
-export default Result;
+export default Detail;

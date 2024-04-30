@@ -17,8 +17,9 @@ const Step3 = () => {
             .then(res => res.json())
             .then(data => {
                 console.log(data);
-                
+                localStorage.setItem('result', JSON.stringify(data));
                 setLoading(false); // Hide spinner after fetching data
+                window.location.href = '/result'; // Redirect to result page
             });
     }
 
@@ -31,7 +32,7 @@ const Step3 = () => {
                         aria-label="Global"
                     >
                         <div className="flex lg:flex-1">
-                            <a href="#" className="-m-1.5 p-1.5">
+                            <a href="/" className="-m-1.5 p-1.5">
                                 <span className="sr-only">jobAra</span>
                                 <img className="h-8 w-auto" src={Wordmark} alt="" />
                             </a>
