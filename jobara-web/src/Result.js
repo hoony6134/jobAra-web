@@ -3,25 +3,7 @@ import Logo from "./logo.png";
 import { useState } from "react"; // Import useState hook
 import { Link } from "react-router-dom";
 
-const Step3 = () => {
-    const [loading, setLoading] = useState(false); // State to manage loading spinner visibility
-
-    const checkResult = () => {
-        setLoading(true); // Show spinner when button is clicked
-        const name = localStorage.getItem('name');
-        const school = localStorage.getItem('school');
-        const profit = localStorage.getItem('profit');
-        const wlb = localStorage.getItem('wlb');
-        const social = localStorage.getItem('social');
-        fetch(`https://jobara.api.scian.xyz/recommendjob?social_weight=${social}&wlb_weight=${wlb}&wage_weight=${profit}`)
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                
-                setLoading(false); // Hide spinner after fetching data
-            });
-    }
-
+const Result = () => {
     return (
         <div>
             <div className="bg-white">
@@ -82,10 +64,10 @@ const Step3 = () => {
                                 </div>
                                 <div className="flex flex-wrap sm:flex-row flex-col py-6 mb-12">
                                     <span className="sm:w-2/5 text-primary font-semibold title-font text-2xl mb-2 sm:mb-0">
-                                        Step 3 <span className="text-secondary">&nbsp; 결과 확인</span>
+                                        Result <span className="text-secondary">&nbsp; 추천 진로</span>
                                     </span>
                                     <p className="sm:w-3/5 leading-relaxed text-base sm:pl-10 pl-0">
-                                        아래 버튼을 눌러 결과를 확인하세요.
+                                        {localStorage.getItem("name")}님에게 딱 맞는 진로를 가져와 봤어요. 각 직업 명칭을 눌러 자세한 정보를 확인해보세요.
                                     </p>
                                 </div>
                             </div>
@@ -125,4 +107,4 @@ const Step3 = () => {
         </div>
     );
 }
-export default Step3;
+export default Result;
