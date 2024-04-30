@@ -9,7 +9,11 @@ const Step3 = () => {
         const profit = localStorage.getItem('profit');
         const wlb = localStorage.getItem('wlb');
         const social = localStorage.getItem('social');
-        alert(`이름: ${name}\n학교: ${school}\n수익: ${profit}\n워라밸: ${wlb}\n사회성: ${social}`)
+        fetch(`https://jobara.api.scian.xyz/recommendjob?social_weight=${social}&wlb_weight=${wlb}&wage_weight=${profit}`)
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+            });
     }
 
     return (
