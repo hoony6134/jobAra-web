@@ -86,7 +86,7 @@ const Home = () => {
                                 >
                                     시작하기
                                 </Link>
-                                <a href="https://github.com/hoony6134" className="text-sm font-semibold leading-6 text-gray-900">
+                                <a href="https://github.com/hoony6134/jobAra-web" className="text-sm font-semibold leading-6 text-gray-900">
                                     소스코드 보기 <span aria-hidden="true">→</span>
                                 </a>
                             </div>
