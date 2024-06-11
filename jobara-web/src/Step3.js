@@ -13,7 +13,9 @@ const Step3 = () => {
         const profit = localStorage.getItem('profit');
         const wlb = localStorage.getItem('wlb');
         const social = localStorage.getItem('social');
-        fetch(`https://jobara.api.scian.xyz/recommendjob?social_weight=${social}&wlb_weight=${wlb}&wage_weight=${profit}`)
+        const category = localStorage.getItem('category');
+        const preferredJob = localStorage.getItem('preferredJob');
+        fetch(`https://jobara.api.scian.xyz/recommendjob?social_weight=${social}&wlb_weight=${wlb}&wage_weight=${profit}&category=${category}&preferred_job=${preferredJob}`)
             .then(res => res.json())
             .then(data => {
                 console.log(data);

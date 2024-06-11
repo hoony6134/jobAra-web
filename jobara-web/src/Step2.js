@@ -8,9 +8,13 @@ const Step2 = () => {
         const profit = document.getElementById('profit-slider').value;
         const wlb = document.getElementById('wlb-slider').value;
         const social = document.getElementById('social-slider').value;
+        const category = document.getElementById('category-selector').value;
+        const preferredJob = document.getElementById('preferred-job').value;
         localStorage.setItem('profit', profit);
         localStorage.setItem('wlb', wlb);
         localStorage.setItem('social', social);
+        localStorage.setItem('category', category);
+        localStorage.setItem('preferredJob', preferredJob);
     }
 
     return (
@@ -84,6 +88,31 @@ const Step2 = () => {
                                 <div className="flex flex-wrap -m-2">
                                     {/* slider */}
                                     <div className="p-2 w-full">
+                                        <div className="relative my-8">
+                                            <label htmlFor="category-selector" className="leading-7 text-xl font-semibold text-primary mb-2">선호 직업 분야</label>
+                                            <select
+                                                id="category-selector"
+                                                name="category-selector"
+                                                className="w-full h-10 bg-white border border-gray-300 rounded-lg appearance-none cursor-pointer mt-2"
+                                            >
+                                                <option value="10">선호 직업 분야 없음</option>
+                                                <option value="0">경영·사무·금융·보험직</option>
+                                                <option value="1">연구직 및 공학 기술직</option>
+                                                <option value="2">교육·법률·사회복지·경찰·소방직 및 군인</option>
+                                                <option value="3">보건·의료직</option>
+                                                <option value="4">예술·디자인·방송·스포츠직</option>
+                                                <option value="5">미용·여행·숙박·음식·경비·청소직</option>
+                                                <option value="6">영업·판매·운전·운송직</option>
+                                                <option value="7">건설·채굴직</option>
+                                                <option value="8">설치·정비·생산직</option>
+                                                <option value="9">농림어업직</option>
+                                            </select>
+                                        </div>
+                                        <div className="relative my-8">
+                                            <label htmlFor="preferred-job" className="leading-7 text-xl font-semibold text-primary">선호 직업</label>
+                                            <label htmlFor="preferred-job" className="leading-7 text-sm text-gray-600"><br />예) 의사, 변호사, 디자이너, 개발자 등 좋아하는 직업명을 <strong>한 가지</strong>만 입력해 주세요.<br />선호하는 직업이 없으시다면 빈칸으로 두셔도 좋습니다.</label>
+                                            <input type="text" id="preferred-job" name="preferred-job" className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                                        </div>
                                         <div className="relative my-8">
                                             <label htmlFor="profit-slider" className="leading-7 text-xl font-semibold text-primary">소득 수준</label>
                                             <input
